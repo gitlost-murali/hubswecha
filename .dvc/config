@@ -1,0 +1,5 @@
+[core]
+    autostage = true
+    remote = gstg
+['remote "gstg"']
+    url = gdrive://1PE86Mtylo1mqR7Y0Lp__HichvZHGQ1iA
