@@ -1,0 +1,25 @@
+stages:
+    preprocess:
+      cmd: python preprocessing.py
+      deps:
+        - data/
+        - preprocessing.py
+      outs:
+        - features/
+    training:
+      cmd: python training.py
+      deps:
+        - features/
+        - training.py
+      params:
+        - model.epochs
+      outs:
+        - model/
+    evaluate:
+      cmd: python evaluate.py
+      deps:
+        - model/
+        - evaluate.py
+      metrics:
+      - scores.json:
+          cache: false
