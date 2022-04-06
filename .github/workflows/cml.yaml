@@ -1,4 +1,4 @@
-name: model-swecha
+name: model-sweccha
 on: [push]
 jobs:
         run:
