@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python preprocessing.py
+    deps:
+    - path: data/
+      md5: 4cb386c1146d7a2f83e2b7c4a7302adf.dir
+      size: 571
+      nfiles: 1
+    - path: preprocessing.py
+      md5: cb4cc53081d77f6bd19dad1605911a1d
+      size: 924
+    outs:
+    - path: features/
+      md5: bc3c208e3e10d467628646b6ac689017.dir
+      size: 2370
+      nfiles: 1
+  training:
+    cmd: python training.py
+    deps:
+    - path: features/
+      md5: bc3c208e3e10d467628646b6ac689017.dir
+      size: 2370
+      nfiles: 1
+    - path: training.py
+      md5: 1f9a1707196d9982bb61ee8369b98360
+      size: 1465
+    params:
+      params.yaml:
+        model.epochs: 10
+    outs:
+    - path: model/
+      md5: 44544f4bc7405ac54d88dc0750065459.dir
+      size: 13666039
+      nfiles: 16
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+    - path: evaluate.py
+      md5: a0bde93d05a7181e788200a823af7b76
+      size: 1082
+    - path: model/
+      md5: 44544f4bc7405ac54d88dc0750065459.dir
+      size: 13666039
+      nfiles: 16
+    outs:
+    - path: scores.json
+      md5: 67ace0075de210cc9c530b3488a6a787
+      size: 94
+      isexec: true
